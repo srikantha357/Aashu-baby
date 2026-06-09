@@ -11,13 +11,13 @@
 margin:0;
 padding:0;
 box-sizing:border-box;
-font-family:'Arial',sans-serif;
+font-family:Arial,sans-serif;
 }
 
 body{
 background:linear-gradient(135deg,#ff758c,#ff7eb3);
-overflow:hidden;
 height:100vh;
+overflow:hidden;
 display:flex;
 justify-content:center;
 align-items:center;
@@ -30,37 +30,36 @@ position:relative;
 max-width:500px;
 padding:20px;
 z-index:10;
-animation:fadeIn 1.5s ease;
 }
 
 h1{
-font-size:2.8rem;
+font-size:2.7rem;
 margin-bottom:10px;
 }
 
 h2{
-font-size:1.8rem;
-margin-bottom:20px;
+margin-bottom:15px;
 }
 
 .photo{
 width:320px;
 max-width:90%;
 border-radius:25px;
-border:5px solid white;
-box-shadow:0 0 25px rgba(255,255,255,.5);
+border:4px solid white;
+box-shadow:0 0 20px rgba(255,255,255,.5);
 margin-bottom:20px;
 }
 
 #message{
 font-size:20px;
 font-weight:bold;
+min-height:60px;
 margin-bottom:20px;
 }
 
 .buttons{
 position:relative;
-height:150px;
+height:180px;
 }
 
 button{
@@ -69,7 +68,7 @@ font-size:24px;
 border:none;
 border-radius:50px;
 cursor:pointer;
-transition:all .3s ease;
+transition:.3s;
 }
 
 #yesBtn{
@@ -86,9 +85,9 @@ margin-left:15px;
 
 .heart{
 position:absolute;
-font-size:25px;
 animation:float linear infinite;
-opacity:.8;
+opacity:.6;
+pointer-events:none;
 }
 
 @keyframes float{
@@ -100,27 +99,16 @@ transform:translateY(-120px);
 }
 }
 
-@keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(30px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
 .finalScreen{
+height:100vh;
+width:100%;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-height:100vh;
-width:100%;
-background:linear-gradient(135deg,#ff4d6d,#ff758f);
 padding:20px;
-animation:fadeIn 1s ease;
+background:linear-gradient(135deg,#ff4d6d,#ff758f);
+text-align:center;
 }
 
 .finalScreen img{
@@ -132,22 +120,13 @@ margin:20px;
 box-shadow:0 0 25px rgba(255,255,255,.6);
 }
 
-.finalScreen h1{
-font-size:3rem;
-margin-bottom:20px;
-}
-
-.finalScreen h2{
-margin-bottom:15px;
-}
-
 .footer{
-margin-top:20px;
 font-size:24px;
+margin-top:20px;
 }
 
 .ring{
-font-size:60px;
+font-size:70px;
 animation:bounce 1s infinite;
 }
 
@@ -182,49 +161,55 @@ From the day I met you, life became more beautiful ❤️
 
 <script>
 
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
-const message = document.getElementById("message");
+const noBtn=document.getElementById("noBtn");
+const yesBtn=document.getElementById("yesBtn");
+const message=document.getElementById("message");
 
-let scale = 1;
+let scale=1;
 
-const messages = [
+const messages=[
 "Are you sure? 🥺",
-"Think again 😘",
+"Please think again ❤️",
+"No isn't an option today 😜",
+"Try clicking YES instead 😘",
 "My heart says YES ❤️",
-"The NO button is broken 😂",
-"Wrong answer detected 🚨",
-"Please don't break my heart 💔",
+"The NO button seems broken 😂",
+"Come on Aashna 😭",
+"Don't break Srikanth's heart 💔",
+"You know you want to click YES 😏",
 "Destiny says YES 💕",
-"You know the answer already 😏",
-"Come on Aashna 😭❤️",
-"Forever sounds nice, right? 🥰"
+"Wrong answer detected 🚨",
+"Still trying? 😂",
+"Nice try, but NO won't work 😜",
+"Forever sounds better ❤️",
+"Last chance to click YES 😘",
+"You're too cute to say NO 🥰",
+"Error 404: NO not found 😜"
 ];
-
-let count = 0;
 
 function moveButton(){
 
-const x = Math.random() * (window.innerWidth - 150);
-const y = Math.random() * (window.innerHeight - 120);
+const x=Math.random()*(window.innerWidth-140);
+const y=Math.random()*(window.innerHeight-140);
 
-noBtn.style.left = x + "px";
-noBtn.style.top = y + "px";
+noBtn.style.left=x+"px";
+noBtn.style.top=y+"px";
 
-message.innerHTML = messages[count % messages.length];
+message.innerHTML=
+messages[Math.floor(Math.random()*messages.length)];
 
-scale += 0.15;
-yesBtn.style.transform = `scale(${scale})`;
+scale+=0.25;
+yesBtn.style.transform=`scale(${scale})`;
 
-count++;
 }
 
-noBtn.addEventListener("mouseover", moveButton);
-noBtn.addEventListener("click", moveButton);
+noBtn.addEventListener("mouseover",moveButton);
+noBtn.addEventListener("click",moveButton);
+noBtn.addEventListener("touchstart",moveButton);
 
-yesBtn.addEventListener("click", ()=>{
+yesBtn.addEventListener("click",()=>{
 
-document.body.innerHTML = `
+document.body.innerHTML=`
 
 <div class="finalScreen">
 
@@ -251,40 +236,32 @@ Forever Yours,<br>
 
 `;
 
-createConfetti();
-
-});
-
-function createConfetti(){
-
-for(let i=0;i<350;i++){
+for(let i=0;i<40;i++){
 
 let heart=document.createElement("div");
 
-heart.innerHTML=["❤️","💕","💖","💘","💝"][Math.floor(Math.random()*5)];
+heart.innerHTML=["❤️","💕","💖","💘"][Math.floor(Math.random()*4)];
 
 heart.style.position="absolute";
 heart.style.left=Math.random()*100+"vw";
 heart.style.top=Math.random()*100+"vh";
-heart.style.fontSize=(Math.random()*35+15)+"px";
+heart.style.fontSize=(Math.random()*30+15)+"px";
 
 document.body.appendChild(heart);
-
 }
 
-}
+});
 
-for(let i=0;i<50;i++){
+for(let i=0;i<12;i++){
 
 let heart=document.createElement("div");
 
 heart.className="heart";
-
-heart.innerHTML=["❤️","💕","💖"][Math.floor(Math.random()*3)];
+heart.innerHTML="❤️";
 
 heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(Math.random()*6+4)+"s";
-heart.style.fontSize=(Math.random()*25+15)+"px";
+heart.style.animationDuration=(Math.random()*8+8)+"s";
+heart.style.fontSize=(Math.random()*20+15)+"px";
 
 document.body.appendChild(heart);
 
