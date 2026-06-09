@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aashna ❤️ Srikanth</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Arial',sans-serif;
+}
+
+body{
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+overflow:hidden;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+position:relative;
+}
+
+.container{
+max-width:500px;
+padding:20px;
+z-index:10;
+animation:fadeIn 1.5s ease;
+}
+
+h1{
+font-size:2.8rem;
+margin-bottom:10px;
+}
+
+h2{
+font-size:1.8rem;
+margin-bottom:20px;
+}
+
+.photo{
+width:320px;
+max-width:90%;
+border-radius:25px;
+border:5px solid white;
+box-shadow:0 0 25px rgba(255,255,255,.5);
+margin-bottom:20px;
+}
+
+#message{
+font-size:20px;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.buttons{
+position:relative;
+height:150px;
+}
+
+button{
+padding:16px 35px;
+font-size:24px;
+border:none;
+border-radius:50px;
+cursor:pointer;
+transition:all .3s ease;
+}
+
+#yesBtn{
+background:#28a745;
+color:white;
+}
+
+#noBtn{
+background:#dc3545;
+color:white;
+position:absolute;
+margin-left:15px;
+}
+
+.heart{
+position:absolute;
+font-size:25px;
+animation:float linear infinite;
+opacity:.8;
+}
+
+@keyframes float{
+from{
+transform:translateY(100vh);
+}
+to{
+transform:translateY(-120px);
+}
+}
+
+@keyframes fadeIn{
+from{
+opacity:0;
+transform:translateY(30px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.finalScreen{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+height:100vh;
+width:100%;
+background:linear-gradient(135deg,#ff4d6d,#ff758f);
+padding:20px;
+animation:fadeIn 1s ease;
+}
+
+.finalScreen img{
+width:300px;
+max-width:90%;
+border-radius:20px;
+border:4px solid white;
+margin:20px;
+box-shadow:0 0 25px rgba(255,255,255,.6);
+}
+
+.finalScreen h1{
+font-size:3rem;
+margin-bottom:20px;
+}
+
+.finalScreen h2{
+margin-bottom:15px;
+}
+
+.footer{
+margin-top:20px;
+font-size:24px;
+}
+
+.ring{
+font-size:60px;
+animation:bounce 1s infinite;
+}
+
+@keyframes bounce{
+0%,100%{transform:translateY(0);}
+50%{transform:translateY(-10px);}
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>❤️ Hey Aashna ❤️</h1>
+
+<h2>Will You Be My Better Half? 💕</h2>
+
+<img src="couple.JPG" class="photo">
+
+<p id="message">
+From the day I met you, life became more beautiful ❤️
+</p>
+
+<div class="buttons">
+<button id="yesBtn">YES ❤️</button>
+<button id="noBtn">NO 😜</button>
+</div>
+
+</div>
+
+<script>
+
+const noBtn = document.getElementById("noBtn");
+const yesBtn = document.getElementById("yesBtn");
+const message = document.getElementById("message");
+
+let scale = 1;
+
+const messages = [
+"Are you sure? 🥺",
+"Think again 😘",
+"My heart says YES ❤️",
+"The NO button is broken 😂",
+"Wrong answer detected 🚨",
+"Please don't break my heart 💔",
+"Destiny says YES 💕",
+"You know the answer already 😏",
+"Come on Aashna 😭❤️",
+"Forever sounds nice, right? 🥰"
+];
+
+let count = 0;
+
+function moveButton(){
+
+const x = Math.random() * (window.innerWidth - 150);
+const y = Math.random() * (window.innerHeight - 120);
+
+noBtn.style.left = x + "px";
+noBtn.style.top = y + "px";
+
+message.innerHTML = messages[count % messages.length];
+
+scale += 0.15;
+yesBtn.style.transform = `scale(${scale})`;
+
+count++;
+}
+
+noBtn.addEventListener("mouseover", moveButton);
+noBtn.addEventListener("click", moveButton);
+
+yesBtn.addEventListener("click", ()=>{
+
+document.body.innerHTML = `
+
+<div class="finalScreen">
+
+<h1>❤️ AASHNA SAID YES ❤️</h1>
+
+<img src="couple.JPG">
+
+<h2>
+You just made me the happiest man alive.
+</h2>
+
+<h2>
+I promise to love, support and annoy you forever ❤️
+</h2>
+
+<div class="ring">💍</div>
+
+<div class="footer">
+Forever Yours,<br>
+<b>Srikanth ❤️</b>
+</div>
+
+</div>
+
+`;
+
+createConfetti();
+
+});
+
+function createConfetti(){
+
+for(let i=0;i<350;i++){
+
+let heart=document.createElement("div");
+
+heart.innerHTML=["❤️","💕","💖","💘","💝"][Math.floor(Math.random()*5)];
+
+heart.style.position="absolute";
+heart.style.left=Math.random()*100+"vw";
+heart.style.top=Math.random()*100+"vh";
+heart.style.fontSize=(Math.random()*35+15)+"px";
+
+document.body.appendChild(heart);
+
+}
+
+}
+
+for(let i=0;i<50;i++){
+
+let heart=document.createElement("div");
+
+heart.className="heart";
+
+heart.innerHTML=["❤️","💕","💖"][Math.floor(Math.random()*3)];
+
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(Math.random()*6+4)+"s";
+heart.style.fontSize=(Math.random()*25+15)+"px";
+
+document.body.appendChild(heart);
+
+}
+
+</script>
+
+</body>
+</html>
